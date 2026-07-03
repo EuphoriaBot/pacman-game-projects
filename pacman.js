@@ -6,10 +6,15 @@ class Pacman {
         this.width = width
         this.height = height
         this.speed = speed
+        this.direction = DIRECTION_RIGHT
     }
 
     moveProcess() {
-
+        this.changeDirectionIfPossible();
+        this.moveForwards();
+        if (this.checkCollision()) {
+            this.moveBackwards();
+        }
     }
 
     eat() {
