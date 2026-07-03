@@ -34,7 +34,7 @@ class Pacman {
                 this.x -= this.speed;
                 break;
             case DIRECTION_UP:
-                this.Y += this.speed;
+                this.y += this.speed;
                 break;
             case DIRECTION_LEFT:
                 this.x += this.speed;
@@ -51,7 +51,7 @@ class Pacman {
                 this.x += this.speed;
                 break;
             case DIRECTION_UP:
-                this.Y -= this.speed;
+                this.y -= this.speed;
                 break;
             case DIRECTION_LEFT:
                 this.x -= this.speed;
@@ -63,7 +63,7 @@ class Pacman {
     }
 
     checkCollision() {
-        if (map[this.getMapY()][this.getMapX()] == 1 || map[this.getMapYRightSide()][this.getMapX] == 1 || map[this.getMapY()][this.getMapXRightSide] == 1 || map[this.getMapYRightSide()][this.getMapXRightSide()] == 1) {
+        if (map[this.getMapY()][this.getMapX()] == 1 || map[this.getMapYRightSide()][this.getMapX()] == 1 || map[this.getMapY()][this.getMapXRightSide()] == 1 || map[this.getMapYRightSide()][this.getMapXRightSide()] == 1) {
             return true;
         }
         return false;
@@ -94,7 +94,7 @@ class Pacman {
     draw() {
         canvasContext.save();
         canvasContext.translate(this.x + oneBlockSize / 2, this.y + oneBlockSize / 2);
-        canvasContext.rotate((this.direction * 90 * Math.PI) / 100);
+        canvasContext.rotate((this.direction * 90 * Math.PI) / 180);
         canvasContext.translate(-this.x - oneBlockSize / 2, -this.y - oneBlockSize / 2);
         canvasContext.drawImage(
             pacmanFrames, (this.currentFrame - 1) * oneBlockSize, 0, oneBlockSize, oneBlockSize, this.x, this.y, this.width, this.height

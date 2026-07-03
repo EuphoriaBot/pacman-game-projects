@@ -17,7 +17,7 @@ let wallInnerColor = "black";
 
 const DIRECTION_RIGHT = 4;
 const DIRECTION_UP = 3;
-const DIRECTION_left = 2;
+const DIRECTION_LEFT = 2;
 const DIRECTION_BOTTOM = 1;
 
 
@@ -59,7 +59,7 @@ let update = () => {
 let draw = () => {
     createRect(0, 0, canvas.width, canvas.height, "black");
     drawWalls();
-
+    drawFoods();
     pacman.draw();
 }
 
