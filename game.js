@@ -53,12 +53,14 @@ let gameLoop = () => {
 }
 
 let update = () => {
-
+    pacman.moveProcess();
 }
 
 let draw = () => {
     createRect(0, 0, canvas.width, canvas.height, "black");
     drawWalls();
+
+    pacman.draw();
 }
 
 let gameInterval = setInterval(gameLoop, 1000 / fps)
@@ -118,3 +120,12 @@ let drawWalls = () => {
         }
     }
 };
+
+let createNewPacman = () => {
+    pacman = new Pacman(
+        oneBlockSize, oneBlockSize, oneBlockSize, oneBlockSize, oneBlockSize / 5
+    );
+};
+
+createNewPacman();
+gameLoop();
