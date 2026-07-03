@@ -22,23 +22,36 @@ class Pacman {
     }
 
     moveBackwards() {
-
+        switch (this.direction) {
+            case DIRECTION_RIGHT:
+                this.x -= this.speed;
+                break;
+            case DIRECTION_UP:
+                this.Y += this.speed;
+                break;
+            case DIRECTION_LEFT:
+                this.x += this.speed;
+                break;
+            case DIRECTION_BOTTOM:
+                this.y -= this.speed;
+                break;
+        }
     }
 
     moveForwards() {
         switch (this.direction) {
             case DIRECTION_RIGHT:
-                this.x += this.speed
-                break
+                this.x += this.speed;
+                break;
             case DIRECTION_UP:
-                this.Y -= this.speed
-                break
+                this.Y -= this.speed;
+                break;
             case DIRECTION_LEFT:
-                this.x -= this.speed
-                break
+                this.x -= this.speed;
+                break;
             case DIRECTION_BOTTOM:
-                this.y += this.speed
-                break
+                this.y += this.speed;
+                break;
         }
     }
 
