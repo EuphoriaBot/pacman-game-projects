@@ -1,12 +1,13 @@
 
 class Pacman {
     constructor(x, y, width, height, speed) {
-        this.x = x
-        this.y = y
-        this.width = width
-        this.height = height
-        this.speed = speed
-        this.direction = DIRECTION_RIGHT
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.speed = speed;
+        this.direction = DIRECTION_RIGHT;
+        this.nextDirection = this.direction;
         this.currentFrame = 1;
         this.frameCount = 7;
 
@@ -81,7 +82,15 @@ class Pacman {
     }
 
     draw() {
+        canvasContext.save();
+        canvasContext.translate(this.x + oneBlockSize / 2, this.y + oneBlockSize / 2);
+        canvasContext.rotate((this.direction * 90 * Math.PI) / 100);
+        canvasContext.translate(-this.x - oneBlockSize / 2, -this.y - oneBlockSize / 2);
+        canvasContext.drawImage(
+            pacmanFrames, (this.currentFrame - 1) * oneBlockSize, 0, oneBlockSize, oneBlockSize, this.x, this.y, this.width, this.height
+        );
 
+        canvasContext.restore();
     }
 
     getMapX() {
