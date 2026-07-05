@@ -91,7 +91,7 @@ let update = () => {
         console.log("hit")
         restartGame();
     }
-    if (score >= 10) {
+    if (score >= foodCount) {
         drawWin();
         clearInterval(gameInterval);
     }
@@ -240,7 +240,7 @@ let createGhosts = () => {
             oneBlockSize,
             oneBlockSize,
             pacman.speed / 2,
-            ghostLocations[1 % 4].x,
+            ghostLocations[i % 4].x,
             ghostLocations[i % 4].y,
             124,
             116,

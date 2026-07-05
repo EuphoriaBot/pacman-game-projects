@@ -18,8 +18,8 @@ class Ghost {
     }
 
     changeRandomDirection() {
-        this.randomTargetIndex += parseInt(Math, random() * 4);
-        this.randomTargetIndex = this.randomTargetIndex % 4;
+        this.randomTargetIndex =
+            (this.randomTargetIndex + 1) % randomTargetsForGhosts.length;
     }
 
     moveProcess() {
@@ -76,10 +76,6 @@ class Ghost {
         return false;
     }
 
-    checkGhostCollision() {
-
-    }
-
     isInRangeOfPacman() {
         let xDistance = Math.abs(pacman.getMapX() - this.getMapX());
         let yDistance = Math.abs(pacman.getMapY() - this.getMapY());
@@ -90,7 +86,7 @@ class Ghost {
     }
 
     changeDirectionIfPossible() {
-        let tempDirection = this.direction
+        let tempDirection = this.direction;
 
         this.direction = this.calculateNewDirection(
             map,
@@ -98,12 +94,34 @@ class Ghost {
             parseInt(this.target.y / oneBlockSize)
         );
 
-        if (typeof this.direction == "undefined") {
+        if (typeof this.direction === "undefined") {
             this.direction = tempDirection;
             return;
         }
 
+        // Pastikan ghost hanya berbelok saat sudah sejajar dengan grid
+        if (
+            this.getMapY() != this.getMapYRightSide() &&
+            (
+                this.direction == DIRECTION_LEFT ||
+                this.direction == DIRECTION_RIGHT
+            )
+        ) {
+            this.direction = DIRECTION_UP;
+        }
+
+        if (
+            this.getMapX() != this.getMapXRightSide() &&
+            (
+                this.direction == DIRECTION_UP ||
+                this.direction == DIRECTION_BOTTOM
+            )
+        ) {
+            this.direction = DIRECTION_LEFT;
+        }
+
         this.moveForwards();
+
         if (this.checkCollision()) {
             this.moveBackwards();
             this.direction = tempDirection;
@@ -198,7 +216,7 @@ class Ghost {
         canvasContext.beginPath();
         canvasContext.strokeStyle = "red"
         canvasContext.arc(
-            this.x + oneBlockSize / 2, this.y + oneBlockSize / 2, this, range * oneBlockSize, 0, 2 * Math.PI
+            this.x + oneBlockSize / 2, this.y + oneBlockSize / 2, this.range * oneBlockSize, 0, 2 * Math.PI
         );
         canvasContext.stroke()
     }
