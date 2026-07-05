@@ -17,6 +17,7 @@ let wallInnerColor = "black";
 let foodColor = "#FEB897"
 let score = 0;
 let ghosts = [];
+let lives = 3;
 let ghostCount = 4;
 
 const DIRECTION_RIGHT = 4;
@@ -96,6 +97,18 @@ let gameOver = () => {
     clearInterval(gameInterval);
 };
 
+let drawLives = () => {
+    canvasContext.font = "20px Emulogic";
+    canvasContext.fillStyle = "white";
+    canvasContext.fillText("Lives: ", 220, oneBlockSize * (map.length + 1) + 10);
+    for (let i = 0; i < lives; i++) {
+        canvasContext.drawImage(
+            pacmanFrames, 2 * oneBlockSize, 0, oneBlockSize, oneBlockSize, 350 + i * oneBlockSize, oneBlockSize * map.length + 10, oneBlockSize, oneBlockSize
+        );
+    }
+};
+
+
 let drawFoods = () => {
     for (let i = 0; i < map.length; i++) {
         for (let j = 0; j < map[0].length; j++) {
@@ -125,7 +138,8 @@ let draw = () => {
     pacman.draw();
     drawScore();
     drawGhosts();
-}
+    drawLives();
+};
 
 let gameInterval = setInterval(gameLoop, 1000 / fps)
 
