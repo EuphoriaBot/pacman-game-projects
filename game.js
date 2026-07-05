@@ -16,12 +16,19 @@ let wallOffset = (oneBlockSize - wallSpaceWidth) / 2;
 let wallInnerColor = "black";
 let foodColor = "#FEB897"
 let score = 0;
+let ghosts = []
 
 const DIRECTION_RIGHT = 4;
 const DIRECTION_UP = 3;
 const DIRECTION_LEFT = 2;
 const DIRECTION_BOTTOM = 1;
 
+let ghostLocations = [
+    { x: 0, y: 0 },
+    { x: 176, y: 0 },
+    { x: 0, y: 121 },
+    { x: 176, y: 121 },
+]
 
 let map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -147,7 +154,26 @@ let createNewPacman = () => {
     );
 };
 
+let createGhosts = () => {
+    ghosts = []
+    for (let i = 0; i < 1; i++) {
+        let newGhost = new Ghost(
+            9 * oneBlockSize + (i % 2 == 0 ? 0 : 1) * oneBlockSize,
+            10 * oneBlockSize + (i % 2 == 0 ? 0 : 1) * oneBlockSize,
+            oneBlockSize,
+            oneBlockSize,
+            pacman.speed / 2,
+            ghostLocations[1 % 4].x,
+            ghostLocations[i % 4].y,
+            124,
+            116,
+            6 + i
+        );
+    }
+};
+
 createNewPacman();
+createGhosts();
 gameLoop();
 
 window.addEventListener("keydown", (event) => {
@@ -163,5 +189,5 @@ window.addEventListener("keydown", (event) => {
         } else if (k == 40 || k == 83) {
             pacman.nextDirection = DIRECTION_BOTTOM
         }
-    }, 1)
-})
+    }, 1);
+});
